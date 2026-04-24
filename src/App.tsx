@@ -44,6 +44,7 @@ import LoanRequisitionModule from './components/LoanRequisitionModule';
 import PerformanceManagement from './components/PerformanceManagement';
 import Attendance from './components/Attendance';
 import ExperienceDetails from './components/ExperienceDetails';
+import FamilyDetails from './components/FamilyDetails';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('Home');
@@ -81,6 +82,8 @@ export default function App() {
               <SalarySlip />
             ) : currentView === 'Experience Details' ? (
               <ExperienceDetails />
+            ) : currentView === 'Family Details' ? (
+              <FamilyDetails />
             ) : currentView === 'Attendance' ? (
               <Attendance />
             ) : currentView === 'Knowbase' ? (
