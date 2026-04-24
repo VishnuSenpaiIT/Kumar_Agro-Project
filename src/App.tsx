@@ -42,6 +42,7 @@ import ITDeclarationModule from './components/ITDeclarationModule';
 import LTAClaimsModule from './components/LTAClaimsModule';
 import LoanRequisitionModule from './components/LoanRequisitionModule';
 import PerformanceManagement from './components/PerformanceManagement';
+import Attendance from './components/Attendance';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('Home');
@@ -77,6 +78,8 @@ export default function App() {
               <GeneralDetails />
             ) : currentView === 'Salary Slip' ? (
               <SalarySlip />
+            ) : currentView === 'Attendance' ? (
+              <Attendance />
             ) : currentView === 'Knowbase' ? (
               <Knowbase />
             ) : currentView === 'Directory' ? (
