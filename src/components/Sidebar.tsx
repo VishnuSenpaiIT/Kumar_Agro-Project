@@ -14,7 +14,8 @@ import {
   Users,
   GraduationCap,
   Info,
-  Landmark
+  Landmark,
+  ClipboardCheck
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -66,6 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemChange }) => {
     { label: 'Education Details', icon: <GraduationCap /> },
     { label: 'Additional Details', icon: <Info /> },
     { label: 'Bank Details', icon: <Landmark /> },
+    { label: 'Other Details', icon: <ClipboardCheck /> },
     { label: 'Salary Slip', icon: <Receipt /> },
   ];
 
