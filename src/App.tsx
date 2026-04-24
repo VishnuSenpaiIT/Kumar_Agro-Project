@@ -9,7 +9,7 @@ import Sidebar from './components/Sidebar';
 import HomeDashboard from './components/HomeDashboard';
 import ProfileModule from './components/ProfileModule';
 import GeneralDetails from './components/GeneralDetails';
-import SalarySlip from './components/SalarySlip';
+import SalarySlipModule from './components/SalarySlipModule';
 import ESSPanel from './components/ESSPanel';
 import DashboardModule from './components/DashboardModule';
 import Knowbase from './components/Knowbase';
@@ -83,7 +83,7 @@ export default function App() {
             ) : currentView === 'General Details' ? (
               <GeneralDetails />
             ) : currentView === 'Salary Slip' ? (
-              <SalarySlip />
+              <SalarySlipModule />
             ) : currentView === 'Experience Details' ? (
               <ExperienceDetails />
             ) : currentView === 'Family Details' ? (
