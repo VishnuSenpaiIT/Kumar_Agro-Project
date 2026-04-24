@@ -7,11 +7,8 @@ import React, { useState } from 'react';
 import { 
   User, 
   CalendarCheck, 
-  CalendarDays,
   FileText, 
   Receipt,
-  Search,
-  BookOpen,
   LayoutDashboard
 } from 'lucide-react';
 
@@ -57,12 +54,9 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemChange }) => {
   const sidebarItems = [
     { label: 'Dashboard', icon: <LayoutDashboard /> },
     { label: 'Profile', icon: <User /> },
-    { label: 'Directory', icon: <Search /> },
     { label: 'Attendance', icon: <CalendarCheck /> },
-    { label: 'Leave Management', icon: <CalendarDays /> },
     { label: 'General Details', icon: <FileText /> },
     { label: 'Salary Slip', icon: <Receipt /> },
-    { label: 'Knowbase', icon: <BookOpen /> },
   ];
 
   return (
