@@ -175,9 +175,9 @@ const CandidateList: React.FC<CandidateListProps> = ({ onCancel, onNavigate }) =
                   <input type="date" className="input-field w-full py-2 text-xs" />
                 </div>
             </div>
-            <button className="btn-primary py-2 text-[10px] font-bold uppercase tracking-widest h-[34px]">
-              Apply Filter
-            </button>
+            <button className="btn-primary py-2 text-[10px] font-bold uppercase tracking-widest h-[34px]" onClick={() => alert("Candidate Filters Applied!")}>
+                Apply Filter
+              </button>
           </div>
         </div>
       </section>

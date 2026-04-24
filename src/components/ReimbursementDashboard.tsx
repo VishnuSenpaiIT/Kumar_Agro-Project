@@ -131,7 +131,10 @@ const ReimbursementDashboard: React.FC<ReimbursementDashboardProps> = ({ onNavig
             <Plus size={18} className="group-hover:rotate-90 transition-transform" />
             Submit New Claim
           </button>
-          <button className="btn-secondary flex items-center gap-2 px-8 py-3.5 text-xs font-bold uppercase tracking-widest">
+          <button 
+            onClick={() => alert('Navigating to Claim History...')}
+            className="btn-secondary flex items-center gap-2 px-8 py-3.5 text-xs font-bold uppercase tracking-widest"
+          >
             <History size={18} />
             View Claim History
           </button>
@@ -173,7 +176,10 @@ const ReimbursementDashboard: React.FC<ReimbursementDashboardProps> = ({ onNavig
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button className="p-1.5 text-gray-300 hover:text-olive transition-colors">
+                      <button 
+                        onClick={() => alert('Action menu opened for claim.')}
+                        className="p-1.5 text-gray-300 hover:text-olive transition-colors"
+                      >
                         <MoreVertical size={16} />
                       </button>
                     </td>

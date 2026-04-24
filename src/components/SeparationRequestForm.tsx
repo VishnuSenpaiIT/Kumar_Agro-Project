@@ -197,9 +197,9 @@ const SeparationRequestForm: React.FC<SeparationRequestFormProps> = ({ onCancel 
 
         {/* 8. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button className="btn-primary px-10 py-3.5 flex-1 text-xs font-bold uppercase tracking-widest shadow-sm">
-            Submit Resignation
-          </button>
+          <button className="btn-primary px-10 py-3.5 flex-1 text-xs font-bold uppercase tracking-widest shadow-sm" onClick={() => alert("Resignation submitted successfully!")}>
+                Submit Resignation
+              </button>
           <button 
             onClick={onCancel}
             className="btn-secondary px-10 py-3.5 flex-1 text-xs font-bold uppercase tracking-widest"

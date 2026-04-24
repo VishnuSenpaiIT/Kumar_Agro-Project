@@ -147,9 +147,9 @@ const ApplyLeave: React.FC<ApplyLeaveProps> = ({ onCancel }) => {
         {/* 6. Attachments (Optional) */}
         <section className="space-y-2">
           <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-widest mb-1">Attachments (Optional)</label>
-          <div className="border-2 border-dashed border-gray-100 rounded-enterprise p-8 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group">
-            <Upload size={28} className="text-gray-300 group-hover:text-olive transition-colors mb-2" />
-            <p className="text-sm font-bold text-gray-400 group-hover:text-text-primary transition-colors">Drag & Drop Documents or click to upload</p>
+          <div onClick={() => alert("File upload dialog opened")} className="border-2 border-dashed border-gray-100 rounded-enterprise p-8 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group">
+                    <Upload size={28} className="text-gray-300 group-hover:text-olive transition-colors mb-2" />
+                    <p className="text-sm font-bold text-gray-400 group-hover:text-text-primary transition-colors">Drag & Drop Documents or click to upload</p>
             <p className="text-xs text-gray-300 mt-1 uppercase">PDF, JPG, PNG (Max 10MB total)</p>
           </div>
         </section>
@@ -168,9 +168,9 @@ const ApplyLeave: React.FC<ApplyLeaveProps> = ({ onCancel }) => {
 
         {/* 8. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button className="btn-primary px-8 py-3 flex-1 text-sm font-bold uppercase tracking-widest shadow-sm">
-            Submit Leave Request
-          </button>
+          <button className="btn-primary px-8 py-3 flex-1 text-sm font-bold uppercase tracking-widest shadow-sm" onClick={() => alert("Leave Request submitted successfully!")}>
+                Submit Leave Request
+              </button>
           <button 
             onClick={onCancel}
             className="btn-secondary px-8 py-3 flex-1 text-sm font-bold uppercase tracking-widest"

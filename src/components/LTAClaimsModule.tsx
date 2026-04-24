@@ -251,7 +251,7 @@ const LTAClaimsModule: React.FC<LTAClaimsModuleProps> = ({ onCancel }) => {
 
             {/* 5. Action Buttons */}
             <div className="flex items-center gap-4">
-              <button className="btn-primary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest shadow-sm">
+              <button className="btn-primary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest shadow-sm" onClick={() => alert("LTA Claim submitted successfully!")}>
                 Submit Claim
               </button>
               <button className="btn-secondary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-50">

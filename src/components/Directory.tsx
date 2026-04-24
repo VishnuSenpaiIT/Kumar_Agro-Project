@@ -56,15 +56,50 @@ type SearchResult = EmployeeResult | DeptResult | DocResult;
 
 const Directory: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [locationFilter, setLocationFilter] = useState('Global');
+  const [deptFilter, setDeptFilter] = useState('All Departments');
+  const [statusFilter, setStatusFilter] = useState('All Status');
 
-  const results: SearchResult[] = [
+  const allResults: SearchResult[] = [
     { type: 'employee', id: 'e1', name: 'Robert Fox', empId: 'EMP-10294', dept: 'Engineering', designation: 'Senior Software Engineer', location: 'New York', status: 'Active' },
     { type: 'employee', id: 'e2', name: 'Jane Cooper', empId: 'EMP-10301', dept: 'Design', designation: 'Lead UI/UX Designer', location: 'London', status: 'On Leave' },
-    { type: 'dept', id: 'd1', name: 'Technology & Innovation', hod: 'Sarah Williams', count: 42, location: 'Global' },
-    { type: 'document', id: 'doc1', name: 'Annual IT Policy 2025', fileType: 'PDF', module: 'Compliance', updatedAt: 'Oct 15, 2025' },
     { type: 'employee', id: 'e3', name: 'Brooklyn Simmons', empId: 'EMP-10405', dept: 'Sales', designation: 'Account Executive', location: 'San Francisco', status: 'Active' },
+    { type: 'employee', id: 'e4', name: 'John Smith', empId: 'EMP-10312', dept: 'Engineering', designation: 'Software Engineer', location: 'New York', status: 'Active' },
+    { type: 'employee', id: 'e5', name: 'John Williams', empId: 'EMP-10415', dept: 'Sales', designation: 'Sales Manager', location: 'London', status: 'Active' },
+    { type: 'employee', id: 'e6', name: 'Sarah Johnson', empId: 'EMP-10320', dept: 'Human Resources', designation: 'HR Manager', location: 'New York', status: 'Active' },
+    { type: 'employee', id: 'e7', name: 'Michael Brown', empId: 'EMP-10330', dept: 'Engineering', designation: 'DevOps Engineer', location: 'San Francisco', status: 'Active' },
+    { type: 'employee', id: 'e8', name: 'Emily Davis', empId: 'EMP-10340', dept: 'Marketing', designation: 'Marketing Specialist', location: 'London', status: 'On Leave' },
+    { type: 'employee', id: 'e9', name: 'David Wilson', empId: 'EMP-10350', dept: 'Finance', designation: 'Financial Analyst', location: 'New York', status: 'Active' },
+    { type: 'employee', id: 'e10', name: 'Lisa Anderson', empId: 'EMP-10360', dept: 'Design', designation: 'UI Designer', location: 'San Francisco', status: 'Inactive' },
+    { type: 'dept', id: 'd1', name: 'Technology & Innovation', hod: 'Sarah Williams', count: 42, location: 'Global' },
     { type: 'dept', id: 'd2', name: 'Human Resources', hod: 'Michael Brown', count: 12, location: 'New York' },
+    { type: 'dept', id: 'd3', name: 'Sales & Marketing', hod: 'John Williams', count: 28, location: 'London' },
+    { type: 'document', id: 'doc1', name: 'Annual IT Policy 2025', fileType: 'PDF', module: 'Compliance', updatedAt: 'Oct 15, 2025' },
+    { type: 'document', id: 'doc2', name: 'HR Handbook 2026', fileType: 'PDF', module: 'HR', updatedAt: 'Jan 01, 2026' },
+    { type: 'document', id: 'doc3', name: 'Engineering Guidelines', fileType: 'DOCX', module: 'Engineering', updatedAt: 'Mar 10, 2026' },
   ];
+
+  const filteredResults = allResults.filter(result => {
+    const matchesSearch = result.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         (result.type === 'employee' && result.empId.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesCategory = activeCategory === 'All' || 
+                           (activeCategory === 'Employees' && result.type === 'employee') ||
+                           (activeCategory === 'Departments' && result.type === 'dept') ||
+                           (activeCategory === 'Documents' && result.type === 'document');
+    
+    const matchesLocation = locationFilter === 'Global' || 
+                           (result.type !== 'document' && result.location === locationFilter);
+    
+    const matchesDept = deptFilter === 'All Departments' || 
+                       (result.type === 'employee' && result.dept === deptFilter);
+    
+    const matchesStatus = statusFilter === 'All Status' || 
+                         (result.type === 'employee' && result.status === statusFilter);
+
+    return matchesSearch && matchesCategory && matchesLocation && matchesDept && matchesStatus;
+  });
 
   return (
     <div id="directory-module" className="w-full max-w-7xl mx-auto py-4">
@@ -78,9 +113,14 @@ const Directory: React.FC = () => {
           <input 
             type="text" 
             placeholder="Search employees, departments, records..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-12 pr-4 py-4 rounded-enterprise border border-border-light shadow-sm bg-white focus:outline-none focus:ring-2 focus:ring-olive/20 focus:border-olive transition-all"
           />
-          <button className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 text-[10px] font-bold uppercase tracking-widest">
+          <button 
+            onClick={() => {}} // Search button can be a trigger if needed
+            className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary px-6 py-2 text-[10px] font-bold uppercase tracking-widest"
+          >
             Search
           </button>
         </div>
@@ -88,8 +128,8 @@ const Directory: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* 2. FILTER PANEL */}
-        <aside className="lg:col-span-1 space-y-6">
-          <div className="enterprise-card bg-white p-6 border border-border-light shadow-sm sticky top-24">
+        <aside className="lg:col-span-1 space-y-6 sticky top-24 self-start">
+          <div className="enterprise-card bg-white p-6 border border-border-light shadow-sm">
             <div className="flex items-center gap-2 mb-6 pb-2 border-b border-gray-50">
               <Filter size={16} className="text-olive" />
               <h2 className="text-xs font-bold text-text-primary uppercase tracking-widest">Apply Filters</h2>
@@ -117,7 +157,11 @@ const Directory: React.FC = () => {
               <div>
                 <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Location</label>
                 <div className="relative">
-                  <select className="input-field w-full py-2 text-xs appearance-none pr-10">
+                  <select 
+                    value={locationFilter}
+                    onChange={(e) => setLocationFilter(e.target.value)}
+                    className="input-field w-full py-2 text-xs appearance-none pr-10"
+                  >
                     <option>Global</option>
                     <option>New York</option>
                     <option>London</option>
@@ -130,7 +174,11 @@ const Directory: React.FC = () => {
               <div>
                 <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Department</label>
                 <div className="relative">
-                  <select className="input-field w-full py-2 text-xs appearance-none pr-10">
+                  <select 
+                    value={deptFilter}
+                    onChange={(e) => setDeptFilter(e.target.value)}
+                    className="input-field w-full py-2 text-xs appearance-none pr-10"
+                  >
                     <option>All Departments</option>
                     <option>Engineering</option>
                     <option>Design</option>
@@ -144,17 +192,24 @@ const Directory: React.FC = () => {
               <div>
                 <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1.5">Status</label>
                 <div className="relative">
-                  <select className="input-field w-full py-2 text-xs appearance-none pr-10">
+                  <select 
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="input-field w-full py-2 text-xs appearance-none pr-10"
+                  >
                     <option>All Status</option>
                     <option>Active</option>
-                    <option>In-active</option>
+                    <option>Inactive</option>
                     <option>On Notice</option>
                   </select>
                   <ChevronDown size={14} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
                 </div>
               </div>
 
-              <button className="btn-primary w-full py-2.5 text-[10px] font-bold uppercase tracking-widest mt-2 hover:bg-olive/90">
+              <button 
+                onClick={() => alert('Filters applied to directory search.')}
+                className="btn-primary w-full py-2.5 text-[10px] font-bold uppercase tracking-widest mt-2 hover:bg-olive/90"
+              >
                 Apply Filters
               </button>
             </div>
@@ -163,14 +218,22 @@ const Directory: React.FC = () => {
           {/* 4. QUICK ACCESS CATEGORIES */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              { title: 'Employee Directory', icon: <Users size={16} /> },
-              { title: 'Department List', icon: <Building2 size={16} /> },
-              { title: 'Role Mapping', icon: <Settings size={16} /> },
-              { title: 'Active Employees', icon: <UserCheck size={16} /> },
-              { title: 'Inactive Employees', icon: <UserMinus size={16} /> },
-              { title: 'All Records', icon: <LayoutGrid size={16} /> },
+              { title: 'Employee Directory', category: 'Employees', icon: <Users size={16} /> },
+              { title: 'Department List', category: 'Departments', icon: <Building2 size={16} /> },
+              { title: 'Role Mapping', category: 'Roles', icon: <Settings size={16} /> },
+              { title: 'Active Employees', category: 'Employees', status: 'Active', icon: <UserCheck size={16} /> },
+              { title: 'Inactive Employees', category: 'Employees', status: 'Inactive', icon: <UserMinus size={16} /> },
+              { title: 'All Records', category: 'All', icon: <LayoutGrid size={16} /> },
             ].map((tile, i) => (
-              <button key={i} className="p-4 rounded-enterprise border border-border-light bg-white hover:border-olive hover:shadow-sm transition-all text-center flex flex-col items-center gap-2 group">
+              <button 
+                key={i} 
+                onClick={() => {
+                  setActiveCategory(tile.category);
+                  if (tile.status) setStatusFilter(tile.status);
+                  else setStatusFilter('All Status');
+                }}
+                className="p-4 rounded-enterprise border border-border-light bg-white hover:border-olive hover:shadow-sm transition-all text-center flex flex-col items-center gap-2 group"
+              >
                 <div className="w-8 h-8 rounded-full bg-olive-light/20 flex items-center justify-center text-olive group-hover:scale-110 transition-transform">
                   {tile.icon}
                 </div>
@@ -185,7 +248,7 @@ const Directory: React.FC = () => {
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-xs font-bold text-text-primary uppercase tracking-widest flex items-center gap-2">
               <span className="w-1 h-4 bg-olive rounded-full"></span>
-              Search Results (6)
+              Search Results ({filteredResults.length})
             </h2>
             <div className="flex items-center gap-2">
               <button className="p-1.5 text-olive bg-olive-light/20 rounded border border-olive/10 shadow-sm"><LayoutGrid size={14} /></button>
@@ -194,7 +257,7 @@ const Directory: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            {results.map((result) => (
+            {filteredResults.map((result) => (
               <div key={result.id} className="enterprise-card bg-white p-5 border border-border-light shadow-sm hover:border-olive transition-all group">
                 {result.type === 'employee' && (
                   <div className="flex items-center justify-between">
@@ -258,7 +321,10 @@ const Directory: React.FC = () => {
                         </div>
                       </div>
                     </div>
-                    <button className="text-[10px] font-bold text-olive uppercase tracking-[0.2em] border border-olive/20 px-4 py-2 rounded shadow-sm hover:bg-olive hover:text-white transition-all">
+                    <button 
+                      onClick={() => alert(`View structure for ${result.name}`)}
+                      className="text-[10px] font-bold text-olive uppercase tracking-[0.2em] border border-olive/20 px-4 py-2 rounded shadow-sm hover:bg-olive hover:text-white transition-all"
+                    >
                       View Structure
                     </button>
                   </div>

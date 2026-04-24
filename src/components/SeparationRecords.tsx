@@ -199,9 +199,9 @@ const SeparationRecords: React.FC<SeparationRecordsProps> = ({ onCancel }) => {
               <label className="block text-[9px] font-bold text-gray-400 uppercase tracking-tighter mb-1">To Date</label>
               <input type="date" className="input-field w-full py-2 text-xs" />
             </div>
-            <button className="btn-primary py-2 text-[10px] font-bold uppercase tracking-widest h-[34px]">
-              Apply Filter
-            </button>
+            <button className="btn-primary py-2 text-[10px] font-bold uppercase tracking-widest h-[34px]" onClick={() => alert("Separation Filters Applied!")}>
+                Apply Filter
+              </button>
           </div>
         </div>
       </section>

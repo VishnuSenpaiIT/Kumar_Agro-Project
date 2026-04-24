@@ -213,10 +213,16 @@ const ITDeclarationModule: React.FC<ITDeclarationModuleProps> = ({ onCancel }) =
 
             {/* 6. Action Buttons */}
             <div className="mt-10 flex items-center gap-4">
-              <button className="btn-primary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest shadow-sm">
+              <button 
+                onClick={() => alert('IT Declaration submitted successfully!')}
+                className="btn-primary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest shadow-sm"
+              >
                 Submit Declaration
               </button>
-              <button className="btn-secondary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-50">
+              <button 
+                onClick={() => alert('IT Declaration draft saved.')}
+                className="btn-secondary flex-1 py-3.5 text-[10px] font-bold uppercase tracking-widest hover:bg-gray-50"
+              >
                 Save Draft
               </button>
               <button 

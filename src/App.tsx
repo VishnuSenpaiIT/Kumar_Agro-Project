@@ -135,7 +135,7 @@ export default function App() {
             ) : currentView === 'Submit Reimbursement' ? (
               <SubmitReimbursementClaim onCancel={() => setCurrentView('Reimbursement')} />
             ) : currentView === 'Total working days' ? (
-              <TotalWorkingDays onCancel={() => setCurrentView('Admin Service')} />
+              <TotalWorkingDays onCancel={() => setCurrentView('Home')} />
             ) : currentView === 'Recruitment' ? (
               <RecruitmentDashboard onNavigate={handleNavigationChange} />
             ) : currentView === 'Job Openings' ? (

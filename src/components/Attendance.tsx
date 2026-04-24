@@ -27,7 +27,17 @@ const SummaryCard: React.FC<AttendanceSummaryProps> = ({ label, count, id }) => 
 );
 
 const Attendance: React.FC = () => {
-  const [currentMonth, setCurrentMonth] = useState('March 2026');
+  const [currentDate, setCurrentDate] = useState(new Date(2026, 2)); // March 2026
+
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const currentMonth = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+
+  const navigateMonth = (direction: 'prev' | 'next') => {
+    const newDate = new Date(currentDate);
+    if (direction === 'prev') newDate.setMonth(newDate.getMonth() - 1);
+    else newDate.setMonth(newDate.getMonth() + 1);
+    setCurrentDate(newDate);
+  };
 
   // Static mock data for the calendar grid
   const daysInMonth = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -72,14 +82,20 @@ const Attendance: React.FC = () => {
         </div>
         
         <div className="flex items-center gap-4 bg-white border border-border-light rounded-button px-4 py-2 shadow-sm">
-          <button className="text-text-secondary hover:text-olive transition-colors">
+          <button 
+            onClick={() => navigateMonth('prev')}
+            className="text-text-secondary hover:text-olive transition-colors"
+          >
             <ChevronLeft size={18} />
           </button>
           <div className="flex items-center gap-2 px-2">
             <CalendarIcon size={16} className="text-olive" />
             <span className="text-sm font-bold text-text-primary min-w-[100px] text-center">{currentMonth}</span>
           </div>
-          <button className="text-text-secondary hover:text-olive transition-colors">
+          <button 
+            onClick={() => navigateMonth('next')}
+            className="text-text-secondary hover:text-olive transition-colors"
+          >
             <ChevronRight size={18} />
           </button>
         </div>

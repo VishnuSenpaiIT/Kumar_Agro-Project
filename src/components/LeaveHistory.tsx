@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   History, 
   Filter, 
@@ -23,13 +23,28 @@ interface LeaveHistoryProps {
 }
 
 const LeaveHistory: React.FC<LeaveHistoryProps> = ({ onCancel }) => {
+  const [typeFilter, setTypeFilter] = useState('All Types');
+  const [statusFilter, setStatusFilter] = useState('All Statuses');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
   const leaveRecords = [
     { fromDate: '2026-04-10', toDate: '2026-04-12', type: 'Casual Leave', days: 3, status: 'Approved', appliedOn: '2026-04-01' },
     { fromDate: '2026-04-05', toDate: '2026-04-05', type: 'Sick Leave', days: 1, status: 'Approved', appliedOn: '2026-04-04' },
     { fromDate: '2026-05-15', toDate: '2026-05-17', type: 'Earned Leave', days: 3, status: 'Pending', appliedOn: '2026-04-20' },
     { fromDate: '2026-03-12', toDate: '2026-03-12', type: 'Optional Leave', days: 1, status: 'Rejected', appliedOn: '2026-03-05' },
     { fromDate: '2026-02-20', toDate: '2026-02-22', type: 'Casual Leave', days: 3, status: 'Approved', appliedOn: '2026-02-10' },
+    { fromDate: '2026-01-10', toDate: '2026-01-11', type: 'Sick Leave', days: 2, status: 'Approved', appliedOn: '2026-01-05' },
   ];
+
+  const filteredRecords = leaveRecords.filter(record => {
+    const matchesType = typeFilter === 'All Types' || record.type === typeFilter;
+    const matchesStatus = statusFilter === 'All Statuses' || record.status === statusFilter;
+    return matchesType && matchesStatus;
+  });
+
+  const totalPages = Math.ceil(filteredRecords.length / itemsPerPage);
+  const paginatedRecords = filteredRecords.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const getStatusStyle = (status: string) => {
     switch (status) {
@@ -80,7 +95,11 @@ const LeaveHistory: React.FC<LeaveHistoryProps> = ({ onCancel }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-end">
             <div>
               <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter mb-1.5">Leave Type</label>
-              <select className="input-field w-full appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[right_10px_center] bg-no-repeat">
+              <select 
+                value={typeFilter}
+                onChange={(e) => { setTypeFilter(e.target.value); setCurrentPage(1); }}
+                className="input-field w-full appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[right_10px_center] bg-no-repeat"
+              >
                 <option>All Types</option>
                 <option>Casual Leave</option>
                 <option>Sick Leave</option>
@@ -90,7 +109,11 @@ const LeaveHistory: React.FC<LeaveHistoryProps> = ({ onCancel }) => {
             </div>
             <div>
               <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-tighter mb-1.5">Status</label>
-              <select className="input-field w-full appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[right_10px_center] bg-no-repeat">
+              <select 
+                value={statusFilter}
+                onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
+                className="input-field w-full appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[right_10px_center] bg-no-repeat"
+              >
                 <option>All Statuses</option>
                 <option>Approved</option>
                 <option>Pending</option>
@@ -105,7 +128,10 @@ const LeaveHistory: React.FC<LeaveHistoryProps> = ({ onCancel }) => {
                 <input type="date" className="input-field flex-1" />
               </div>
             </div>
-            <button className="btn-primary w-full py-2.5 text-xs font-bold uppercase tracking-widest shadow-sm">
+            <button 
+              onClick={() => alert('Filters applied.')}
+              className="btn-primary w-full py-2.5 text-xs font-bold uppercase tracking-widest shadow-sm"
+            >
               Apply Filter
             </button>
           </div>
@@ -130,8 +156,8 @@ const LeaveHistory: React.FC<LeaveHistoryProps> = ({ onCancel }) => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {leaveRecords.length > 0 ? (
-                  leaveRecords.map((record, index) => (
+                {paginatedRecords.length > 0 ? (
+                  paginatedRecords.map((record, index) => (
                     <tr key={index} className="hover:bg-olive-light/10 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
@@ -183,15 +209,33 @@ const LeaveHistory: React.FC<LeaveHistoryProps> = ({ onCancel }) => {
 
           {/* Pagination Placeholder */}
           <div className="px-6 py-4 bg-gray-50/20 border-t border-gray-100 flex items-center justify-between">
-            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Showing 5 of 24 records</span>
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+              Showing {paginatedRecords.length} of {filteredRecords.length} records
+            </span>
             <div className="flex items-center gap-2">
-              <button className="p-1.5 border border-gray-100 rounded bg-white text-gray-300 hover:text-olive transition-colors disabled:opacity-50" disabled>
+              <button 
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="p-1.5 border border-gray-100 rounded bg-white text-gray-300 hover:text-olive transition-colors disabled:opacity-50"
+              >
                 <ChevronLeft size={14} />
               </button>
-              <button className="px-2.5 py-1 rounded bg-olive text-white text-[10px] font-bold shadow-sm">1</button>
-              <button className="px-2.5 py-1 rounded bg-white border border-gray-100 text-[10px] font-bold text-gray-400 hover:bg-gray-50">2</button>
-              <button className="px-2.5 py-1 rounded bg-white border border-gray-100 text-[10px] font-bold text-gray-400 hover:bg-gray-50">3</button>
-              <button className="p-1.5 border border-gray-100 rounded bg-white text-gray-400 hover:text-olive transition-colors">
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                  <button 
+                    key={p}
+                    onClick={() => setCurrentPage(p)}
+                    className={`px-2.5 py-1 rounded text-[10px] font-bold transition-all ${currentPage === p ? 'bg-olive text-white shadow-sm' : 'bg-white border border-gray-100 text-gray-400 hover:bg-gray-50'}`}
+                  >
+                    {p}
+                  </button>
+                ))}
+              </div>
+              <button 
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages || totalPages === 0}
+                className="p-1.5 border border-gray-100 rounded bg-white text-gray-400 hover:text-olive transition-colors disabled:opacity-50"
+              >
                 <ChevronRight size={14} />
               </button>
             </div>
