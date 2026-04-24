@@ -9,7 +9,8 @@ import {
   CalendarCheck, 
   FileText, 
   Receipt,
-  LayoutDashboard
+  LayoutDashboard,
+  Briefcase
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -56,6 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemChange }) => {
     { label: 'Profile', icon: <User /> },
     { label: 'Attendance', icon: <CalendarCheck /> },
     { label: 'General Details', icon: <FileText /> },
+    { label: 'Experience Details', icon: <Briefcase /> },
     { label: 'Salary Slip', icon: <Receipt /> },
   ];
 
