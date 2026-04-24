@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Primary Colors */
+  --color-olive: #6B8E23;
+  --color-olive-dark: #556B2F;
+  --color-olive-hover: #8FAF3C;
+  --color-olive-light: #F1F4E8;
+  
+  /* Neutral Colors */
+  --color-off-white: #F8F9F5;
+  --color-border-light: #E0E0E0;
+  --color-text-primary: #2E2E2E;
+  --color-text-secondary: #6B6B6B;
+  
+  /* Status Colors */
+  --color-present: #DAF2E3;
+  --color-absent: #FCE8E8;
+  --color-mis-punch: #FEF3D9;
+  
+  /* Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Radius */
+  --radius-enterprise: 8px;
+  --radius-button: 6px;
+}
+
+@layer base {
+  body {
+    @apply bg-off-white text-text-primary font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-text-primary font-bold;
+  }
+
+  input, select, textarea {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .enterprise-card {
+    @apply bg-white border border-border-light rounded-enterprise p-5 transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply px-4 py-2 bg-olive text-white rounded-button text-sm font-semibold hover:bg-olive-hover transition-colors flex items-center justify-center gap-2;
+  }
+  
+  .btn-secondary {
+    @apply px-4 py-2 border border-olive text-olive rounded-button text-sm font-semibold hover:bg-olive-light transition-colors flex items-center justify-center gap-2;
+  }
+  
+  .input-field {
+    @apply px-3 py-2 bg-white border border-border-light rounded-button text-sm focus:outline-none focus:border-olive focus:ring-1 focus:ring-olive/20 transition-all placeholder:text-gray-400;
+  }
+}
