@@ -12,7 +12,8 @@ import {
   LayoutDashboard,
   Briefcase,
   Users,
-  GraduationCap
+  GraduationCap,
+  Info
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -62,6 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeItem, onItemChange }) => {
     { label: 'Experience Details', icon: <Briefcase /> },
     { label: 'Family Details', icon: <Users /> },
     { label: 'Education Details', icon: <GraduationCap /> },
+    { label: 'Additional Details', icon: <Info /> },
     { label: 'Salary Slip', icon: <Receipt /> },
   ];
 

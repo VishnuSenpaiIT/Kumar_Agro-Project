@@ -46,6 +46,7 @@ import Attendance from './components/Attendance';
 import ExperienceDetails from './components/ExperienceDetails';
 import FamilyDetails from './components/FamilyDetails';
 import EducationDetails from './components/EducationDetails';
+import AdditionalDetails from './components/AdditionalDetails';
 
 export default function App() {
   const [currentView, setCurrentView] = useState('Home');
@@ -87,6 +88,8 @@ export default function App() {
               <FamilyDetails />
             ) : currentView === 'Education Details' ? (
               <EducationDetails />
+            ) : currentView === 'Additional Details' ? (
+              <AdditionalDetails />
             ) : currentView === 'Attendance' ? (
               <Attendance />
             ) : currentView === 'Knowbase' ? (
