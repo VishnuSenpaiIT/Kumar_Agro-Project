@@ -175,10 +175,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ onNavigate }) => {
                       </div>
                     </td>
                     <td className="px-6 py-4 text-right">
-                      <button 
-                        onClick={() => alert('Action menu for ' + activity.type + ' opened.')}
-                        className="text-gray-300 group-hover:text-olive transition-colors p-1"
-                      >
+                      <button className="text-gray-300 group-hover:text-olive transition-colors p-1">
                         <MoreVertical size={16} />
                       </button>
                     </td>
@@ -188,10 +185,7 @@ const LeaveManagement: React.FC<LeaveManagementProps> = ({ onNavigate }) => {
             </table>
           </div>
           <div className="px-6 py-4 bg-gray-50/30 border-t border-gray-100 flex items-center justify-center">
-            <button 
-              onClick={() => onNavigate?.('Leave History')}
-              className="text-[10px] font-bold text-olive uppercase tracking-[0.2em] hover:underline transition-all"
-            >
+            <button className="text-[10px] font-bold text-olive uppercase tracking-[0.2em] hover:underline transition-all">
               View Full History Report
             </button>
           </div>

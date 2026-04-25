@@ -179,10 +179,7 @@ const AssetRequest: React.FC<AssetRequestProps> = ({ onCancel }) => {
 
         {/* 8. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button 
-            onClick={() => alert('Asset Request submitted successfully!')}
-            className="btn-primary px-8 py-3 flex-1 text-sm"
-          >
+          <button className="btn-primary px-8 py-3 flex-1 text-sm">
             Submit Request
           </button>
           <button 

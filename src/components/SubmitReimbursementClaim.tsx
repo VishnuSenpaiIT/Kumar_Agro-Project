@@ -209,10 +209,7 @@ const SubmitReimbursementClaim: React.FC<SubmitReimbursementClaimProps> = ({ onC
 
         {/* 8. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button 
-            onClick={() => alert('Reimbursement claim submitted successfully!')}
-            className="btn-primary px-10 py-3.5 flex-1 text-xs font-bold uppercase tracking-widest shadow-sm"
-          >
+          <button className="btn-primary px-10 py-3.5 flex-1 text-xs font-bold uppercase tracking-widest shadow-sm">
             Submit Claim
           </button>
           <button 

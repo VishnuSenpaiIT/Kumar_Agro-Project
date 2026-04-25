@@ -162,7 +162,7 @@ const DocumentRequest: React.FC<DocumentRequestProps> = ({ onCancel }) => {
 
         {/* 7. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button className="btn-primary px-8 py-3 flex-1 text-sm font-bold uppercase tracking-widest shadow-sm" onClick={() => alert("Request submitted successfully!")}>
+          <button className="btn-primary px-8 py-3 flex-1 text-sm font-bold uppercase tracking-widest shadow-sm">
             Submit Request
           </button>
           <button 

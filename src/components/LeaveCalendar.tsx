@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   CalendarDays, 
   ChevronLeft, 
@@ -20,14 +20,11 @@ interface LeaveCalendarProps {
 }
 
 const LeaveCalendar: React.FC<LeaveCalendarProps> = ({ onCancel }) => {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 2)); // March 2026
-
-  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const month = monthNames[currentDate.getMonth()];
-  const year = currentDate.getFullYear();
-  
-  const daysInMonth = new Date(year, currentDate.getMonth() + 1, 0).getDate();
-  const startingDay = new Date(year, currentDate.getMonth(), 1).getDay();
+  // Mock data for March 2026
+  const month = "March";
+  const year = "2026";
+  const daysInMonth = 31;
+  const startingDay = 0; // Sunday
 
   const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
@@ -43,13 +40,6 @@ const LeaveCalendar: React.FC<LeaveCalendarProps> = ({ onCancel }) => {
   };
 
   const today = 23;
-
-  const navigateMonth = (direction: 'prev' | 'next') => {
-    const newDate = new Date(currentDate);
-    if (direction === 'prev') newDate.setMonth(newDate.getMonth() - 1);
-    else newDate.setMonth(newDate.getMonth() + 1);
-    setCurrentDate(newDate);
-  };
 
   const renderCells = () => {
     const cells = [];
@@ -116,19 +106,13 @@ const LeaveCalendar: React.FC<LeaveCalendarProps> = ({ onCancel }) => {
         
         <div className="flex items-center gap-4">
             <div className="flex items-center bg-white border border-border-light rounded-button overflow-hidden shadow-sm">
-                <button 
-                    onClick={() => navigateMonth('prev')}
-                    className="p-2.5 hover:bg-gray-50 border-r border-gray-100 transition-colors text-gray-400 hover:text-olive"
-                >
+                <button className="p-2.5 hover:bg-gray-50 border-r border-gray-100 transition-colors text-gray-400 hover:text-olive">
                     <ChevronLeft size={18} />
                 </button>
                 <div className="px-6 py-2 text-sm font-bold text-text-primary uppercase tracking-widest min-w-[140px] text-center">
                     {month} {year}
                 </div>
-                <button 
-                    onClick={() => navigateMonth('next')}
-                    className="p-2.5 hover:bg-gray-50 border-l border-gray-100 transition-colors text-gray-400 hover:text-olive"
-                >
+                <button className="p-2.5 hover:bg-gray-50 border-l border-gray-100 transition-colors text-gray-400 hover:text-olive">
                     <ChevronRight size={18} />
                 </button>
             </div>
@@ -224,10 +208,7 @@ const LeaveCalendar: React.FC<LeaveCalendarProps> = ({ onCancel }) => {
                         </div>
                     </div>
 
-                    <button 
-                        onClick={() => alert('Add event modal opened.')}
-                        className="w-full btn-secondary py-3 text-xs font-bold uppercase tracking-[0.2em]"
-                    >
+                    <button className="w-full btn-secondary py-3 text-xs font-bold uppercase tracking-[0.2em]">
                         Add Event
                     </button>
                 </div>

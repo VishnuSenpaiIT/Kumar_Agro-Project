@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { 
   Calendar, 
   CheckCircle2, 
@@ -58,17 +58,6 @@ interface TotalWorkingDaysProps {
 }
 
 const TotalWorkingDays: React.FC<TotalWorkingDaysProps> = ({ onCancel }) => {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 3)); // April 2026
-
-  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const currentMonthLabel = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-
-  const navigateMonth = (direction: 'prev' | 'next') => {
-    const newDate = new Date(currentDate);
-    if (direction === 'prev') newDate.setMonth(newDate.getMonth() - 1);
-    else newDate.setMonth(newDate.getMonth() + 1);
-    setCurrentDate(newDate);
-  };
   const monthlyData = [
     { month: 'January', total: 22, present: 21 },
     { month: 'February', total: 20, present: 19 },
@@ -110,19 +99,9 @@ const TotalWorkingDays: React.FC<TotalWorkingDaysProps> = ({ onCancel }) => {
         </div>
         <div className="flex items-center gap-3">
             <div className="flex items-center bg-white border border-gray-100 shadow-sm rounded-button overflow-hidden">
-                <button 
-                    onClick={() => navigateMonth('prev')}
-                    className="p-2 hover:bg-gray-50 text-gray-400 group"
-                >
-                    <ChevronLeft size={16} className="group-hover:text-olive transition-colors" />
-                </button>
-                <span className="px-4 text-[11px] font-bold text-text-primary uppercase tracking-widest">{currentMonthLabel}</span>
-                <button 
-                    onClick={() => navigateMonth('next')}
-                    className="p-2 hover:bg-gray-50 text-gray-400 group"
-                >
-                    <ChevronRight size={16} className="group-hover:text-olive transition-colors" />
-                </button>
+                <button className="p-2 hover:bg-gray-50 text-gray-400 group"><ChevronLeft size={16} className="group-hover:text-olive transition-colors" /></button>
+                <span className="px-4 text-[11px] font-bold text-text-primary uppercase tracking-widest">April 2026</span>
+                <button className="p-2 hover:bg-gray-50 text-gray-400 group"><ChevronRight size={16} className="group-hover:text-olive transition-colors" /></button>
             </div>
             <button 
                 onClick={onCancel}
@@ -155,7 +134,7 @@ const TotalWorkingDays: React.FC<TotalWorkingDaysProps> = ({ onCancel }) => {
               <div className="w-1 h-5 bg-olive rounded-full"></div>
               <h2 className="text-xs font-bold text-text-primary uppercase tracking-[0.2em]">Monthly Breakdown (Year 2026)</h2>
             </div>
-            <button className="text-[10px] font-bold text-olive uppercase tracking-widest hover:underline" onClick={() => alert("Navigating to Working Days History...")}>View History</button>
+            <button className="text-[10px] font-bold text-olive uppercase tracking-widest hover:underline">View History</button>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {monthlyData.map((data, index) => (
@@ -182,10 +161,7 @@ const TotalWorkingDays: React.FC<TotalWorkingDaysProps> = ({ onCancel }) => {
               <h2 className="text-xs font-bold text-text-primary uppercase tracking-[0.2em]">Day-wise details</h2>
             </div>
             <div className="flex items-center gap-2">
-                <button 
-                    onClick={() => alert('Filter options opened.')}
-                    className="p-2 border border-gray-100 rounded-button bg-white text-gray-400 hover:text-olive transition-colors flex items-center gap-2 shadow-sm"
-                >
+                <button className="p-2 border border-gray-100 rounded-button bg-white text-gray-400 hover:text-olive transition-colors flex items-center gap-2 shadow-sm">
                     <Filter size={14} />
                     <span className="text-[10px] font-bold uppercase tracking-widest">Filter</span>
                 </button>
@@ -226,7 +202,7 @@ const TotalWorkingDays: React.FC<TotalWorkingDaysProps> = ({ onCancel }) => {
             </div>
             <div className="bg-gray-50/30 px-6 py-4 border-t border-gray-100 flex items-center justify-between">
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Updated as of Today, 09:00 AM</span>
-                <button className="btn-secondary px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest" onClick={() => alert("Exporting PDF...")}>Export PDF</button>
+                <button className="btn-secondary px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest">Export PDF</button>
             </div>
           </div>
         </section>

@@ -177,7 +177,7 @@ const AccommodationRequest: React.FC<AccommodationRequestProps> = ({ onCancel })
 
         {/* 8. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button className="btn-primary px-8 py-3 flex-1 text-sm" onClick={() => alert("Request submitted successfully!")}>
+          <button className="btn-primary px-8 py-3 flex-1 text-sm">
             Submit Request
           </button>
           <button 

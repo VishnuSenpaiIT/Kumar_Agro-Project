@@ -131,7 +131,7 @@ const IDCardRequest: React.FC<IDCardRequestProps> = ({ onCancel }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-widest">Upload Photo</label>
-              <div onClick={() => alert("File upload dialog opened")} className="border-2 border-dashed border-gray-100 rounded-enterprise p-6 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group">
+              <div className="border-2 border-dashed border-gray-100 rounded-enterprise p-6 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group">
                 <Upload size={24} className="text-gray-300 group-hover:text-olive transition-colors mb-2" />
                 <p className="text-[11px] font-bold text-gray-400 group-hover:text-text-primary transition-colors">Drag & Drop Photo</p>
                 <p className="text-[9px] text-gray-300 mt-1 uppercase">JPG or PNG (Max 2MB)</p>
@@ -139,7 +139,7 @@ const IDCardRequest: React.FC<IDCardRequestProps> = ({ onCancel }) => {
             </div>
             <div className="space-y-2">
               <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-widest">Supporting Doc (Optional)</label>
-              <div onClick={() => alert("File upload dialog opened")} className="border-2 border-dashed border-gray-100 rounded-enterprise p-6 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group h-full">
+              <div className="border-2 border-dashed border-gray-100 rounded-enterprise p-6 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group h-full">
                 <Upload size={24} className="text-gray-300 group-hover:text-olive transition-colors mb-2" />
                 <p className="text-[11px] font-bold text-gray-400 group-hover:text-text-primary transition-colors">Attach Document</p>
                 <p className="text-[9px] text-gray-300 mt-1 uppercase">PDF (Max 5MB)</p>
@@ -162,10 +162,7 @@ const IDCardRequest: React.FC<IDCardRequestProps> = ({ onCancel }) => {
 
         {/* 6. Action Buttons */}
         <div className="flex items-center gap-4 pt-4">
-          <button 
-            onClick={() => alert('ID Card Request submitted successfully!')}
-            className="btn-primary px-8 py-3 flex-1"
-          >
+          <button className="btn-primary px-8 py-3 flex-1">
             Submit Request
           </button>
           <button 

@@ -25,6 +25,7 @@ import HelpdeskTickets from './components/HelpdeskTickets';
 import DocumentRequest from './components/DocumentRequest';
 import HRSupportRequest from './components/HRSupportRequest';
 import LeaveManagement from './components/LeaveManagement';
+import LearningManagement from './components/LearningManagement';
 import ApplyLeave from './components/ApplyLeave';
 import LeaveHistory from './components/LeaveHistory';
 import LeaveCalendar from './components/LeaveCalendar';
@@ -122,6 +123,8 @@ export default function App() {
               <DocumentRequest onCancel={() => setCurrentView('Admin Service')} />
             ) : currentView === 'HR Support Requests' ? (
               <HRSupportRequest onCancel={() => setCurrentView('Admin Service')} />
+            ) : currentView === 'Learning Management' ? (
+              <LearningManagement />
             ) : currentView === 'Leave Management' ? (
               <LeaveManagement onNavigate={handleNavigationChange} />
             ) : currentView === 'Apply Leave' ? (
@@ -135,7 +138,7 @@ export default function App() {
             ) : currentView === 'Submit Reimbursement' ? (
               <SubmitReimbursementClaim onCancel={() => setCurrentView('Reimbursement')} />
             ) : currentView === 'Total working days' ? (
-              <TotalWorkingDays onCancel={() => setCurrentView('Home')} />
+              <TotalWorkingDays onCancel={() => setCurrentView('Admin Service')} />
             ) : currentView === 'Recruitment' ? (
               <RecruitmentDashboard onNavigate={handleNavigationChange} />
             ) : currentView === 'Job Openings' ? (

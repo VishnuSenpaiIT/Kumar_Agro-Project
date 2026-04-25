@@ -99,8 +99,8 @@ const Navbar: React.FC<NavbarProps> = ({ activeItem, onItemChange }) => {
               key={item.label}
               label={item.label}
               icon={item.icon}
-              isActive={activeItem === item.label}
-              onClick={() => onItemChange(item.label)}
+              isActive={activeItem === item.label || (item.label === 'LMS' && activeItem === 'Learning Management')}
+              onClick={() => onItemChange(item.label === 'LMS' ? 'Learning Management' : item.label)}
             />
           ))}
         </div>
