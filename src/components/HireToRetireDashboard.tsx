@@ -157,7 +157,10 @@ const HireToRetireDashboard: React.FC = () => {
               <Briefcase size={18} className="text-olive" />
               <h2 className="text-sm font-bold text-text-primary uppercase tracking-widest">Employee Status Tracking</h2>
            </div>
-           <button className="text-[10px] font-bold text-olive uppercase tracking-[0.2em] hover:underline">
+           <button 
+             onClick={() => alert('Full Hire-to-Retire report opened.')}
+             className="text-[10px] font-bold text-olive uppercase tracking-[0.2em] hover:underline"
+           >
              View Full Report
            </button>
         </div>

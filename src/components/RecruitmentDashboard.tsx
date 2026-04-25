@@ -72,7 +72,10 @@ const RecruitmentDashboard: React.FC<RecruitmentDashboardProps> = ({ onNavigate 
         </div>
         
         <div className="flex items-center gap-3">
-          <button className="btn-primary flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-widest group">
+          <button 
+            onClick={() => onNavigate?.('Job Openings')}
+            className="btn-primary flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-widest group"
+          >
             <Plus size={16} className="group-hover:rotate-90 transition-transform" />
             Create Job Opening
           </button>

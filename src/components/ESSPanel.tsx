@@ -22,7 +22,9 @@ import {
   CreditCard,
   Monitor,
   Key,
-  ShieldCheck
+  ShieldCheck,
+  MessageSquare,
+  HelpCircle
 } from 'lucide-react';
 
 interface ESSItemProps {
@@ -137,14 +139,15 @@ const ESSPanel: React.FC<ESSPanelProps> = ({ isOpen, onClose, onNavigate }) => {
             </div>
 
             {/* REMAINING MODULES */}
+            <ESSItem label="Helpdesk Tickets" icon={<HelpCircle />} onClick={() => handleNavigate('Helpdesk Tickets')} />
             <ESSItem label="Leave management system" icon={<Calendar />} onClick={() => handleNavigate('Leave Management')} />
             <ESSItem label="Reimbursement" icon={<Wallet />} onClick={() => handleNavigate('Reimbursement')} />
             <ESSItem label="Total working days" icon={<Clock />} onClick={() => handleNavigate('Total working days')} />
             <ESSItem label="Recruitment" icon={<Briefcase />} onClick={() => handleNavigate('Recruitment')} />
-            <ESSItem label="Seperation" icon={<LogOut />} onClick={() => handleNavigate('Separation')} />
-            <ESSItem label="It declaration" icon={<FileText />} onClick={() => handleNavigate('IT Declaration')} />
+            <ESSItem label="Separation" icon={<LogOut />} onClick={() => handleNavigate('Separation')} />
+            <ESSItem label="IT Declaration" icon={<FileText />} onClick={() => handleNavigate('IT Declaration')} />
             <ESSItem label="LTA Claims" icon={<Plane />} onClick={() => handleNavigate('LTA Claims')} />
-            <ESSItem label="Loan requisition" icon={<Landmark />} onClick={() => handleNavigate('Loan Requisition')} />
+            <ESSItem label="Loan Requisition" icon={<Landmark />} onClick={() => handleNavigate('Loan Requisition')} />
 
           </div>
         </div>

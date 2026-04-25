@@ -126,7 +126,10 @@ const AdminService: React.FC<AdminServiceProps> = ({ onNavigate }) => {
             <p className="text-sm font-bold text-text-primary">You have 0 pending administrative requests.</p>
           </div>
         </div>
-        <button className="btn-secondary px-6 py-2">
+        <button 
+          onClick={() => onNavigate?.('Helpdesk Tickets')}
+          className="btn-secondary px-6 py-2"
+        >
           View History
         </button>
       </div>

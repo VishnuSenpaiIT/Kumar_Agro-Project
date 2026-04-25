@@ -234,7 +234,7 @@ const LoanRequisitionModule: React.FC<LoanRequisitionModuleProps> = ({ onCancel 
 
             {/* Action Buttons */}
             <div className="flex items-center gap-4">
-              <button className="btn-primary flex-1 py-4 text-[11px] font-bold uppercase tracking-widest shadow-sm">
+              <button className="btn-primary flex-1 py-4 text-[11px] font-bold uppercase tracking-widest shadow-sm" onClick={() => alert("Loan Request submitted successfully!")}>
                 Submit Loan Request
               </button>
               <button className="btn-secondary flex-1 py-4 text-[11px] font-bold uppercase tracking-widest">

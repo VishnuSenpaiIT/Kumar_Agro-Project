@@ -179,7 +179,10 @@ const SeparationDashboard: React.FC<SeparationDashboardProps> = ({ onNavigate })
                     </span>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <button className="p-2 text-gray-300 hover:text-olive transition-colors" title="View Details">
+                    <button 
+                      onClick={() => alert('View separation details for ' + req.name)}
+                      className="p-2 text-gray-300 hover:text-olive transition-colors" title="View Details"
+                    >
                       <Eye size={18} />
                     </button>
                   </td>
@@ -216,7 +219,10 @@ const SeparationDashboard: React.FC<SeparationDashboardProps> = ({ onNavigate })
           <div>
             <h4 className="text-sm font-bold text-text-primary uppercase tracking-widest mb-1">Exit Interviews</h4>
             <p className="text-xs text-text-secondary leading-normal mb-4">Manage scheduling and feedback collection for upcoming exit interviews.</p>
-            <button className="btn-secondary px-6 py-2.5 text-[10px] font-bold uppercase tracking-widest">
+            <button 
+              onClick={() => alert('Manage Exit Interviews modal opened.')}
+              className="btn-secondary px-6 py-2.5 text-[10px] font-bold uppercase tracking-widest"
+            >
               Manage Interviews
             </button>
           </div>

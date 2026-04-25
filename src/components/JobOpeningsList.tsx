@@ -100,7 +100,7 @@ const JobOpeningsList: React.FC<JobOpeningsListProps> = ({ onCancel }) => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <button className="btn-primary flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-widest group">
+          <button className="btn-primary flex items-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-widest group" onClick={() => alert("Opening Create Job Form...")}>
             <Plus size={16} className="group-hover:rotate-90 transition-transform" />
             Create New Job Opening
           </button>
@@ -161,9 +161,9 @@ const JobOpeningsList: React.FC<JobOpeningsListProps> = ({ onCancel }) => {
                 <option>Closed</option>
               </select>
             </div>
-            <button className="btn-primary py-2 text-[10px] font-bold uppercase tracking-widest h-[34px]">
-              Apply Filter
-            </button>
+            <button className="btn-primary py-2 text-[10px] font-bold uppercase tracking-widest h-[34px]" onClick={() => alert("Filters Applied!")}>
+                Apply Filter
+              </button>
           </div>
         </div>
       </section>

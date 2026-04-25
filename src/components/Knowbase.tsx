@@ -257,7 +257,10 @@ const Knowbase: React.FC = () => {
                      <Clock size={14} />
                      <span className="text-[10px] font-bold uppercase tracking-widest">Doc-ID: {selectedArticle.id}</span>
                    </div>
-                   <button className="btn-primary px-8 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em]">
+                   <button 
+                     onClick={() => window.print()}
+                     className="btn-primary px-8 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em]"
+                   >
                      Print Article
                    </button>
                 </div>
@@ -328,9 +331,12 @@ const Knowbase: React.FC = () => {
             <p className="text-[10px] text-text-secondary font-medium">Technical assistance available 24/7. Contact IT Support for system-related issues.</p>
           </div>
         </div>
-        <button className="btn-secondary px-6 py-2.5 text-[10px] font-bold uppercase tracking-widest border-olive/20 text-olive">
-          Request Assistance
-        </button>
+         <button 
+           onClick={() => alert('Assistance request sent to HR Support.')}
+           className="btn-secondary px-6 py-2.5 text-[10px] font-bold uppercase tracking-widest border-olive/20 text-olive"
+         >
+           Request Assistance
+         </button>
       </div>
     </div>
   );

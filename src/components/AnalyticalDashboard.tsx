@@ -79,7 +79,10 @@ const AnalyticalDashboard: React.FC = () => {
               <Calendar size={14} className="text-olive" />
               <span className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">April 2026</span>
            </div>
-           <button className="btn-secondary px-6 py-2 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:border-olive">
+           <button 
+             onClick={() => alert('CSV Export initiated.')}
+             className="btn-secondary px-6 py-2 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 hover:border-olive"
+           >
              <Download size={14} /> Export CSV
            </button>
         </div>
@@ -222,7 +225,10 @@ const AnalyticalDashboard: React.FC = () => {
                     <span className="text-xs font-bold text-blue-600">45 Active</span>
                  </div>
               </div>
-              <button className="btn-primary w-full mt-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] shadow-button">
+              <button 
+                onClick={() => alert('Full statistical audit generation initiated.')}
+                className="btn-primary w-full mt-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] shadow-button"
+              >
                  Run Full Statistical Audit
               </button>
            </div>

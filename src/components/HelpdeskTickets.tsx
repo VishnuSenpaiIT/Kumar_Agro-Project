@@ -33,6 +33,11 @@ interface Ticket {
 
 const HelpdeskTickets: React.FC = () => {
   const [view, setView] = useState<ViewType>('LIST');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('All');
+  const [statusFilter, setStatusFilter] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const tickets: Ticket[] = [
     { id: 'TKT-7821', subject: 'Cloud VPN connection issues', category: 'IT Issue', status: 'In Progress', priority: 'High', date: '2026-04-20' },
@@ -40,7 +45,19 @@ const HelpdeskTickets: React.FC = () => {
     { id: 'TKT-7809', subject: 'Onboarding access for new intern', category: 'IT Issue', status: 'Closed', priority: 'Low', date: '2026-04-15' },
     { id: 'TKT-7792', subject: 'Updating Home Address in Portal', category: 'HR Issue', status: 'Open', priority: 'Medium', date: '2026-04-12' },
     { id: 'TKT-7788', subject: 'Project Management Tool License', category: 'General', status: 'Open', priority: 'High', date: '2026-04-10' },
+    { id: 'TKT-7780', subject: 'Laptop Screen Flickering', category: 'IT Issue', status: 'In Progress', priority: 'Medium', date: '2026-04-05' },
+    { id: 'TKT-7775', subject: 'EPF Withdrawal Process Query', category: 'Payroll', status: 'Resolved', priority: 'Low', date: '2026-04-01' },
   ];
+
+  const filteredTickets = tickets.filter(t => {
+    const matchesSearch = t.subject.toLowerCase().includes(searchQuery.toLowerCase()) || t.id.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = categoryFilter === 'All' || t.category === categoryFilter;
+    const matchesStatus = statusFilter === 'All' || t.status === statusFilter;
+    return matchesSearch && matchesCategory && matchesStatus;
+  });
+
+  const totalPages = Math.ceil(filteredTickets.length / itemsPerPage);
+  const paginatedTickets = filteredTickets.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   const getStatusStyle = (status: string) => {
     switch (status) {
@@ -104,18 +121,36 @@ const HelpdeskTickets: React.FC = () => {
               <input 
                 type="text" 
                 placeholder="Search ticket ID or subject..." 
+                value={searchQuery}
+                onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
                 className="input-field w-full pl-10 h-10"
               />
             </div>
             <div className="flex items-center gap-3 w-full md:w-auto">
-              <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 bg-gray-50 border border-gray-100 rounded-button text-xs font-bold text-gray-500 hover:bg-gray-100 transition-colors">
-                <Filter size={14} />
-                Filters
-              </button>
-              <select className="flex-1 md:flex-none px-4 py-2 bg-gray-50 border border-gray-100 rounded-button text-xs font-bold text-gray-500 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[right_10px_center] bg-no-repeat pr-8 transition-colors hover:bg-gray-100">
-                <option>Newest First</option>
-                <option>Status</option>
-                <option>Priority</option>
+              <div className="relative flex-1 md:flex-none">
+                <select 
+                  value={categoryFilter}
+                  onChange={(e) => { setCategoryFilter(e.target.value); setCurrentPage(1); }}
+                  className="w-full px-4 py-2 bg-gray-50 border border-gray-100 rounded-button text-xs font-bold text-gray-500 appearance-none pr-8 h-10"
+                >
+                  <option>All</option>
+                  <option>IT Issue</option>
+                  <option>HR Issue</option>
+                  <option>Payroll</option>
+                  <option>General</option>
+                </select>
+                <Filter size={12} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+              </div>
+              <select 
+                value={statusFilter}
+                onChange={(e) => { setStatusFilter(e.target.value); setCurrentPage(1); }}
+                className="flex-1 md:flex-none px-4 py-2 bg-gray-50 border border-gray-100 rounded-button text-xs font-bold text-gray-500 appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwb2x5bGluZSBwb2ludHM9IjYgOSAxMiAxNSAxOCA5Ij48L3BvbHlsaW5lPjwvc3ZnPg==')] bg-[length:14px] bg-[right_10px_center] bg-no-repeat pr-8 h-10 transition-colors hover:bg-gray-100"
+              >
+                <option value="All">All Status</option>
+                <option>Open</option>
+                <option>In Progress</option>
+                <option>Resolved</option>
+                <option>Closed</option>
               </select>
             </div>
           </div>
@@ -136,7 +171,7 @@ const HelpdeskTickets: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
-                  {tickets.map((ticket) => (
+                  {paginatedTickets.map((ticket) => (
                     <tr 
                       key={ticket.id} 
                       className="hover:bg-olive-light/10 transition-colors group cursor-pointer"
@@ -185,15 +220,40 @@ const HelpdeskTickets: React.FC = () => {
             
             {/* Table Footer / Pagination */}
             <div className="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex items-center justify-between">
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Showing 5 of 5 Tickets</p>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                Showing {paginatedTickets.length} of {filteredTickets.length} Tickets
+              </p>
               <div className="flex items-center gap-2">
-                <button className="px-3 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-400 hover:bg-olive hover:border-olive hover:text-white transition-all disabled:opacity-50">PREV</button>
-                <button className="px-3 py-1 bg-olive border border-olive rounded text-[10px] font-bold text-white shadow-sm">1</button>
-                <button className="px-3 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-400 hover:bg-olive hover:border-olive hover:text-white transition-all">NEXT</button>
+                <button 
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-400 hover:bg-olive hover:border-olive hover:text-white transition-all disabled:opacity-50"
+                >
+                  PREV
+                </button>
+                <div className="flex items-center gap-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+                    <button 
+                      key={p}
+                      onClick={() => setCurrentPage(p)}
+                      className={`px-3 py-1 rounded text-[10px] font-bold transition-all ${currentPage === p ? 'bg-olive border border-olive text-white shadow-sm' : 'bg-white border border-gray-200 text-gray-400'}`}
+                    >
+                      {p}
+                    </button>
+                  ))}
+                </div>
+                <button 
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages || totalPages === 0}
+                  className="px-3 py-1 bg-white border border-gray-200 rounded text-[10px] font-bold text-gray-400 hover:bg-olive hover:border-olive hover:text-white transition-all disabled:opacity-50"
+                >
+                  NEXT
+                </button>
               </div>
             </div>
           </div>
         </div>
+
       ) : (
         <div className="w-full max-w-[700px] mx-auto">
           <div className="enterprise-card bg-white shadow-sm">
@@ -243,7 +303,10 @@ const HelpdeskTickets: React.FC = () => {
               {/* Attachment */}
               <div className="space-y-2">
                 <label className="block text-[10px] font-bold text-text-secondary uppercase tracking-widest">Attachment</label>
-                <div className="border-2 border-dashed border-gray-100 rounded-enterprise p-8 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group">
+                <div 
+                  onClick={() => alert('File upload dialog opened')}
+                  className="border-2 border-dashed border-gray-100 rounded-enterprise p-8 flex flex-col items-center justify-center text-center hover:border-olive/30 hover:bg-olive-light/20 transition-all cursor-pointer group"
+                >
                   <Upload size={24} className="text-gray-300 group-hover:text-olive transition-colors mb-2" />
                   <p className="text-xs font-bold text-gray-400 group-hover:text-text-primary transition-colors">Drag & Drop file or click to upload</p>
                   <p className="text-[10px] text-gray-300 mt-1 uppercase">Max File Size: 10MB</p>
@@ -264,7 +327,10 @@ const HelpdeskTickets: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-4 pt-6 border-t border-gray-50">
-                <button className="btn-primary flex-1 py-3 text-sm font-bold uppercase tracking-widest shadow-sm">
+                <button 
+                  onClick={() => alert('Helpdesk Ticket submitted successfully!')}
+                  className="btn-primary flex-1 py-3 text-sm font-bold uppercase tracking-widest shadow-sm"
+                >
                   Submit Ticket
                 </button>
                 <button 
